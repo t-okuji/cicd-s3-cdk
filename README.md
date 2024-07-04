@@ -1,12 +1,23 @@
-# Welcome to your CDK TypeScript project
+# CDK + CodeCommit + CodeBuild + CodePipeline
 
-This is a project for CDK development with TypeScript.
-
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+This is a project for uploading in S3.
 
 ## Diagrams
 
 ![AWS Diagrams](/drawio/cicd-s3-cdk.svg)
+
+## Push codebuild custom image to ecr
+
+```
+docker build -t <custom-image-name> . --platform linux/amd64
+docker tag <custom-image-name>:latest xxxxxxxxxxxx.dkr.ecr.<your region>.amazonaws.com/cicd-s3-ecr-repository:latest
+docker push xxxxxxxxxxxx.dkr.ecr.<your region>.amazonaws.com/cicd-s3-ecr-repository:latest
+```
+
+## Run pipeline
+
+Add buildspec.yml to your project and push to CodeCommit.
+Refer to `buildspec_sample.yml`.
 
 ## Useful commands
 
